@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HydroSmart Bottle</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", Arial, sans-serif;
+        }
+
+        body {
+            background: #f7faff;
+            color: #1a1a1a;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 8%;
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        header nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        header nav a:hover {
+            color: #3b82f6;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 90px 8%;
+            background: linear-gradient(135deg, #dbeafe, #fff);
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+        }
+
+        .hero-text {
+            max-width: 500px;
+            animation: fadeIn 1.4s ease forwards;
+        }
+
+        .hero-text h2 {
+            font-size: 52px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 18px;
+        }
+
+        .hero-text p {
+            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(59, 130, 246, 0.3);
+        }
+
+        .hero img {
+            width: 390px;
+            border-radius: 22px;
+            animation: slideUp 1.3s ease forwards;
+        }
+
+        section {
+            padding: 80px 8%;
+            scroll-margin: 50px;
+        }
+
+        h2.section-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 45px;
+        }
+
+        .features {
+            display: flex;
+            gap: 25px;
+        }
+
+        .feature-box {
+            flex: 1;
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            transition: .3s;
+            animation: fadeIn 1.2s;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-box h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+            color: #3b82f6;
+        }
+
+        /* -------- Pricing -------- */
+        .pricing {
+            margin-top: 40px;
+            scroll-margin: 50px;
+        }
+
+        .pricing-grid {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .price-card {
+            flex: 1;
+            max-width: 300px;
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            transition: .3s;
+        }
+
+        .price-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .price-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #3b82f6;
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 12px 0;
+            color: #111;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .price-card ul li {
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .price-card .btn {
+            display: block;
+            margin-top: 18px;
+        }
+
+        .highlight {
+            border: 2px solid #3b82f6;
+            transform: scale(1.03);
+        }
+
+        /* -------- Testimonials -------- */
+        .testimonials {
+            margin-top: 60px;
+        }
+
+        .test-grid {
+            display: flex;
+            gap: 25px;
+        }
+
+        .test-card {
+            flex: 1;
+            background: white;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            text-align: center;
+            font-style: italic;
+            transition: .3s;
+        }
+
+        .test-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .test-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        /* -------- CTA -------- */
+        .cta {
+            text-align: center;
+            padding: 90px 8%;
+            background: linear-gradient(to right, #3b82f6, #2563eb);
+            color: white;
+            border-radius: 30px;
+            margin: 60px 8%;
+        }
+
+        .cta h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .cta a {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 14px 32px;
+            background: white;
+            color: #3b82f6;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .cta a:hover {
+            transform: translateY(-3px);
+        }
+
+        footer {
+            padding: 28px 8%;
+            text-align: center;
+            background: white;
+            font-size: 14px;
+            margin-top: 30px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media(max-width:900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero img {
+                margin-top: 45px;
+            }
+
+            .features,
+            .pricing-grid,
+            .test-grid {
+                flex-direction: column;
+            }
+
+            .cta {
+                margin: 30px 0;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>HydroSmart</h1>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#cta">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h2>Drink Smarter. Live Healthier.</h2>
+            <p>The next-generation smart bottle that tracks hydration, reminds you to drink & connects to your phone.
+            </p>
+            <a href="#" class="btn">Buy Now – ₹2,999</a>
+        </div>
+        <img src="smart-water-bottle.webp" alt="Smart Bottle">
+    </section>
+
+    <section id="features">
+        <h2 class="section-title">Why Choose HydroSmart?</h2>
+        <div class="features">
+            <div class="feature-box">
+                <h3>💧 Hydration Tracking</h3>
+                <p>Monitors daily water intake using smart sensors.</p>
+            </div>
+            <div class="feature-box">
+                <h3>⏰ Smart Alerts</h3>
+                <p>Lights up & sends reminders when it's time to drink.</p>
+            </div>
+            <div class="feature-box">
+                <h3>📱 App Sync</h3>
+                <p>Track hydration stats & set goals using mobile app.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🔹 PRICING SECTION -->
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">Choose Your Plan</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Starter</h3>
+                <p class="price">₹1,999</p>
+                <ul>
+                    <li>Standard Water Bottle</li>
+                    <li>Basic Tracking</li>
+                </ul>
+                <a href="#" class="btn">Select</a>
+            </div>
+
+            <div class="price-card highlight">
+                <h3>Pro</h3>
+                <p class="price">₹2,999</p>
+                <ul>
+                    <li>Smart Sensors</li>
+                    <li>Hydration Alerts</li>
+                    <li>Mobile App Sync</li>
+                </ul>
+                <a href="#" class="btn">Best Deal</a>
+            </div>
+
+            <div class="price-card">
+                <h3>Family Pack</h3>
+                <p class="price">₹6,999</p>
+                <ul>
+                    <li>3 Smart Bottles</li>
+                    <li>App Profiles for Family</li>
+                </ul>
+                <a href="#" class="btn">Select</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⭐ TESTIMONIALS SECTION -->
+    <section class="testimonials" id="reviews">
+        <h2 class="section-title">What People Say</h2>
+        <div class="test-grid">
+            <div class="test-card">
+                <img src="https://i.pravatar.cc/60?img=1">
+                “Now I drink enough water every day — best purchase!”
+                <br><strong>- Riya</strong>
+            </div>
+            <div class="test-card">
+                <img src="https://i.pravatar.cc/60?img=4">
+                “The reminders changed my life — super helpful.”
+                <br><strong>- Abdul</strong>
+            </div>
+            <div class="test-card">
+                <img src="https://i.pravatar.cc/60?img=7">
+                “Great for the gym and office. Totally worth it.”
+                <br><strong>- Kavya</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="cta">
+        <h2>Start Your Hydration Journey Today</h2>
+        <p>Stay energized, active & healthier — one sip at a time.</p>
+        <a href="#">Order Now</a>
+    </section>
+
+    <footer>
+        © 2025 HydroSmart Bottle — All rights reserved.
+    </footer>
+
+</body>
+
+</html>
