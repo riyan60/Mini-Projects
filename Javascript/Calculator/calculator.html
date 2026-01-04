@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Calculator</title>
+    <style>
+        body {
+            background: #000;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            background: #1c1c1c;
+            width: 300px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .display {
+            color: #fff;
+            font-size: 58px;
+            text-align: right;
+            padding: 20px 10px;
+            height: 90px;
+            overflow: hidden;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 30px;
+            padding: 15px;
+            border: none;
+            border-radius: 45px;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+
+        .grey {
+            background: #a5a5a5;
+            color: #000;
+        }
+
+        .dark {
+            background: #333;
+            color: #fff;
+        }
+
+        .orange {
+            background: #ff9f0a;
+            color: #fff;
+        }
+
+        .zero {
+            grid-column: span 2;
+            text-align: left;
+            padding-left: 26px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+
+        <div class="buttons">
+            <button class="grey" onclick="clearDisplay()">C</button>
+            <button class="grey" onclick="plusMinus()">+/-</button>
+            <button class="grey" onclick="percent()">%</button>
+            <button class="orange" onclick="append('/')">÷</button>
+
+            <button class="dark" onclick="append('7')">7</button>
+            <button class="dark" onclick="append('8')">8</button>
+            <button class="dark" onclick="append('9')">9</button>
+            <button class="orange" onclick="append('*')">×</button>
+
+            <button class="dark" onclick="append('4')">4</button>
+            <button class="dark" onclick="append('5')">5</button>
+            <button class="dark" onclick="append('6')">6</button>
+            <button class="orange" onclick="append('-')">−</button>
+
+            <button class="dark" onclick="append('1')">1</button>
+            <button class="dark" onclick="append('2')">2</button>
+            <button class="dark" onclick="append('3')">3</button>
+            <button class="orange" onclick="append('+')">+</button>
+
+            <button class="dark zero" onclick="append('0')">0</button>
+            <button class="dark" onclick="append('.')">.</button>
+            <button class="orange" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById("display");
+
+        document.addEventListener("keydown", (e) => {
+            if (!isNaN(e.key)) append(e.key);       // number keys
+            if (["+", "-", "*", "/"].includes(e.key)) append(e.key); // operators
+            if (e.key === "Enter" || e.key === "=") calculate();      // enter = equals
+            if (e.key === "Backspace") backspace();                   // BACKSPACE key
+            if (e.key === "c" || e.key === "C") clearDisplay();       // press C to clear
+            if (e.key === ".") append(".");
+        });
+
+        function backspace() {
+            if (display.innerText.length === 1 || display.innerText === "Error") {
+                display.innerText = "0";
+            } else {
+                display.innerText = display.innerText.slice(0, -1);
+            }
+        }
+
+        function append(value) {
+            if (display.innerText === "0") {
+                if (["+", "-", "*", "/"].includes(value)) {
+                    display.innerText = "0" + value;   // allow: 0+
+                } else {
+                    display.innerText = value;
+                }
+            } else if (value === '.' && display.innerText.includes('.')) {
+                return; // Prevent multiple decimals
+            } else if (['+', '-', '*', '/'].includes(value) && ['+', '-', '*', '/'].includes(display.innerText.slice(-1))) {
+                display.innerText = display.innerText.slice(0, -1) + value; // Replace last operator
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = "0";
+        }
+
+        function calculate() {
+            let expr = display.innerText;
+
+            // If last char is оператор, remove it
+            if (["+", "-", "*", "/"].includes(expr.slice(-1))) {
+                expr = expr.slice(0, -1);
+            }
+
+            try {
+                display.innerText = eval(expr);
+            } catch {
+                display.innerText = "Error";
+            }
+        }
+
+        function plusMinus() {
+            display.innerText = String(-Number(display.innerText));
+        }
+
+        function percent() {
+            display.innerText = String(Number(display.innerText) / 100);
+        }
+    </script>
+
+</body>
+
+</html>
